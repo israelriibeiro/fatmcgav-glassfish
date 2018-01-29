@@ -1,28 +1,24 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__),"..","..",".."))
 
-Puppet::Type.newtype(:jmsresource) do
-  @doc = "Manage JMS resources of Glassfish domains"
+Puppet::Type.newtype(:jmsdest) do
+  @doc = "Manage JMS destination of Glassfish domains"
 
   ensurable
 
   newparam(:name) do
-    desc "The JMS resource name."
+    desc "The JMS destination resource name."
     isnamevar
 
     validate do |value|
       unless value =~ /^\w+[\w=\-\/.]*$/
-         raise ArgumentError, "%s is not a valid JMS resource name." % value
+         raise ArgumentError, "%s is not a valid JMS destination name." % value
       end
     end
   end
 
-  newparam(:restype) do
-    desc "The resource type."
-    newvalues('javax.jms.Topic', 'javax.jms.Queue', 'javax.jms.ConnectionFactory', 'javax.jms.TopicConnectionFactory', 'javax.jms.QueueConnectionFactory')
-  end
-
-  newparam(:description) do
-    desc "The resource description"
+  newparam(:desttype) do
+    desc "The destination type."
+    newvalues('javax.jms.Topic', 'javax.jms.Queue')
   end
 
   newparam(:properties) do
