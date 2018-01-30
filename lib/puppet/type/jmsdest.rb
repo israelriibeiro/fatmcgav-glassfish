@@ -88,7 +88,7 @@ Puppet::Type.newtype(:jmsdest) do
 
   # Validate mandatory params
   validate do
-    raise Puppet::Error, 'Restype is required.' unless self[:restype]
+    raise Puppet::Error, 'Desttype is required.' unless self[:desttype]
   end
 
   # Autorequire the user running command
